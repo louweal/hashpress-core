@@ -11,27 +11,24 @@ function enqueue_hashpress_script()
     // Enqueue the script
     $path = plugin_dir_url(dirname(__FILE__, 1));
 
-    if (is_user_logged_in()) {
-        $current_user = wp_get_current_user();
+    // if (is_user_logged_in()) {
+    //     if (wp_get_current_user()->user_login === 'anneloes') {
+    //     }
+    // }
 
-        $target_username = 'anneloes';
+    wp_enqueue_script('hashpress-main-script', $path . 'dist/main.bundle.js', array(), null, array(
+        'strategy'  => 'defer', 'in_footer' => false
+    ));
 
-        if ($current_user->user_login === $target_username) {
-            wp_enqueue_script('hashpress-main-script', $path . 'dist/main.bundle.js', array(), null, array(
-                'strategy'  => 'defer', 'in_footer' => false
-            ));
+    // Localize the REST API URL and nonce for authentication
+    wp_localize_script('hashpress-main-script', 'hashpressCoreData', array(
+        'nonce' => wp_create_nonce('wp_rest'),  // Generate a nonce for authentication
+        'getProjectSettings' => esc_url_raw(rest_url('hashpress/v1/get-project-settings'))  // REST API endpoint URL
+    ));
 
-            // Localize the REST API URL and nonce for authentication
-            wp_localize_script('hashpress-main-script', 'hashpressData', array(
-                'nonce' => wp_create_nonce('wp_rest'),  // Generate a nonce for authentication
-                'rest_url' => esc_url_raw(rest_url('hashpress/v1/get-project-settings'))  // REST API endpoint URL
-            ));
-
-            wp_enqueue_script('hashpress-vendor-script', $path .  'dist/vendors.bundle.js', array(), null, array(
-                'strategy'  => 'defer', 'in_footer' => false
-            ));
-        }
-    }
+    wp_enqueue_script('hashpress-vendor-script', $path .  'dist/vendors.bundle.js', array(), null, array(
+        'strategy'  => 'defer', 'in_footer' => false
+    ));
 }
 
 add_action('wp_enqueue_scripts', 'hashpress_enqueue_styles', 5);

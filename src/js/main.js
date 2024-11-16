@@ -4,7 +4,7 @@ import { LedgerId } from "@hashgraph/sdk";
 (function () {
     "use strict";
 
-    console.log("core!");
+    // console.log("core!");
 
     setupConnectButtons();
 
@@ -59,10 +59,10 @@ import { LedgerId } from "@hashgraph/sdk";
     // Fetch metadata and project_id together
     async function fetchAppMetadataAndProjectId() {
         try {
-            const response = await fetch(hashpressData.rest_url, {
+            const response = await fetch(hashpressCoreData.getProjectSettings, {
                 method: "GET",
                 headers: {
-                    "X-WP-Nonce": hashpressData.nonce,
+                    "X-WP-Nonce": hashpressCoreData.nonce,
                 },
             });
 

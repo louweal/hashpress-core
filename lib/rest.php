@@ -6,7 +6,7 @@ function register_project_settings_endpoint()
     register_rest_route('hashpress/v1', '/get-project-settings', array(
         'methods' => 'GET',
         'callback' => 'get_project_settings',
-        'permission_callback' => 'project_settings_permission_check'
+        'permission_callback' => 'hashpress_core_validate_nonce'
     ));
 }
 
@@ -26,11 +26,13 @@ function get_project_settings()
     }
 }
 
-// Permission check to ensure only authorized users can access this endpoint
-function project_settings_permission_check()
+function hashpress_core_validate_nonce(WP_REST_Request $request)
 {
-    // Allow only users with the 'manage_options' capability (usually admins)
-    return current_user_can('manage_options');
+    $nonce = $request->get_header('X-WP-Nonce');
+    if (wp_verify_nonce($nonce, 'wp_rest')) {
+        return true;
+    }
+    return new WP_Error('rest_forbidden', __('Invalid nonce.'), ['status' => 403]);
 }
 
 // Hook the function into the REST API initialization

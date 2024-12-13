@@ -4,7 +4,7 @@ Plugin Name: HashPress Core
 Description: General settings for HashPress, required when using other HashPress plugins
 Version: 0.1
 Author: HashPress
-Author URI: https://hashpresspioneers.com/
+Author URI: https://hashpress.io/
 */
 
 // Exit if accessed directly.

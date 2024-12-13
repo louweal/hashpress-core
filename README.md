@@ -1,3 +1,3 @@
 # HashPress Core
 
-[Docs](https://docs.hashpresspioneers.com)
+[Docs](https://docs.hashpress.io)

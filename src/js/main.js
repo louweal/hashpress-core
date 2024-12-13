@@ -49,6 +49,8 @@ import { LedgerId } from "@hashgraph/sdk";
 
                 // Initialize and open pairing if not yet paired
                 await window.hashconnect.init();
+                window.dispatchEvent(new CustomEvent("hashconnectInitDone"));
+
                 if (!window.pairingData) window.hashconnect.openPairingModal();
             }
         } catch (error) {

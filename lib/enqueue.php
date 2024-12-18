@@ -11,11 +11,6 @@ function enqueue_hashpress_script()
     // Enqueue the script
     $path = plugin_dir_url(dirname(__FILE__, 1));
 
-    // if (is_user_logged_in()) {
-    //     if (wp_get_current_user()->user_login === 'anneloes') {
-    //     }
-    // }
-
     wp_enqueue_script('hashpress-main-script', $path . 'dist/main.bundle.js', array(), null, array(
         'strategy'  => 'defer', 'in_footer' => false
     ));

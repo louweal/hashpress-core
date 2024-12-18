@@ -6,7 +6,7 @@
  */
 
 add_action('admin_menu', function () {
-    // add_menu_page('HashPress', 'HashPress', 'manage_options', 'hashpress', 'hashpress_settings', 'dashicons-money-alt');
+    add_menu_page('HashPress', 'HashPress', 'manage_options', 'hashpress', 'hashpress_settings', 'dashicons-money-alt');
     add_submenu_page(
         'options-general.php', // Parent slug for the "Settings" menu
         'HashPress',           // Page title
